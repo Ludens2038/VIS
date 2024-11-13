@@ -1,0 +1,6 @@
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/Hello.dir
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/Primitive_SocketServer.dir
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/Primitive_SocketClient.dir
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/Demo_SocketServer.dir
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/edit_cache.dir
+/cygdrive/c/Users/Haris/Documents/FH/VIS/VIS/cmake-build-debug-cygwin/CMakeFiles/rebuild_cache.dir

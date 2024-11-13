@@ -8,7 +8,7 @@
 #include <semaphore.h> // sem_init
 #include <pthread.h>
 
-#define BUFFER_SIZE 1024 //puffer for messages
+#define BUFFER_SIZE 1024 //buffer for messages
 
 #define BACKLOG 13 //max amount of incoming connections
 
@@ -95,8 +95,7 @@ int main(int _argc, char **_argv) {
                  * 2. parameter: char array that contains content from socket (incoming from client)
                  * 3. parameter: length of the char-array
                  * 4. parameter: flags. no specific flag has been chosen. 0 stands for standard reading of rcv
-                 * recv returns -1 if fails
-                 */
+                 * recv returns -1 if fails */
                 rVal = recv(activeSocket, comBuffer, BUFFER_SIZE, 0);
 
                 if (rVal == -1) { //in case connection fails

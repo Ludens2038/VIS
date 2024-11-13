@@ -110,7 +110,7 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 CMAKE_LINKER:FILEPATH=/usr/bin/ld.exe
 
 //make program
-CMAKE_MAKE_PROGRAM:FILEPATH=/cygdrive/c/Program Files/JetBrains/CLion 2024.2.2/bin/ninja/cygwin/x64/ninja.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=/cygdrive/c/Program Files (x86)/JetBrains/CLion 2024.2.3/bin/ninja/cygwin/x64/ninja.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.

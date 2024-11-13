@@ -19,15 +19,15 @@ using namespace std;
 int main(int _argc, char **_argv) {
     int port = 4949;
 
-    //init random with timeseed
+    //initialize random number generator
     std::srand((std::time(0)));
 
-    //start message
+    //startup message
     cout << "starting up primitive socket sever ... " << endl;
 
-    //creating a passiv socket to wait for connections
+    //creating a passive socket waiting for connections
     int passiveSocket = socket(AF_INET, SOCK_STREAM, 0);
-    //if the connection is failng, print out a message and break
+    //if the connection fails
     if (passiveSocket == -1) {
         cout << "error while generating socket handle" << endl;
         cout << "ERROR = " << strerror(errno) << endl;
@@ -38,7 +38,7 @@ int main(int _argc, char **_argv) {
     sockaddr_in addr;
     addr.sin_family = AF_INET; //ipv4
     addr.sin_port = htons(port); //set the port, htons -> convert in byte sequence
-    addr.sin_addr.s_addr = INADDR_ANY; //accept connections from ip-addresses
+    addr.sin_addr.s_addr = INADDR_ANY; //accept connections from any ip-address
     socklen_t size = sizeof(addr);
 
     //to bind the socket to the specific addr
@@ -50,7 +50,7 @@ int main(int _argc, char **_argv) {
         return -1;
     }
 
-    //put the socket into listen modus
+    //put the socket into listen mode
     rVal = listen(passiveSocket, BACKLOG);
     if (rVal == -1) {
         cout << "error while setting socket handle to listen mode " << endl;
@@ -59,9 +59,10 @@ int main(int _argc, char **_argv) {
     }
 
 
-    sockaddr_in clientAddr; //to safe client addr
-    size = sizeof(clientAddr);
+    sockaddr_in clientAddr; // struct that stores client address
+    size = sizeof(clientAddr); // getting size for further cpp operations
     cout << "server waiting for client on port ... " << port << endl;
+
     bool running = true;
     while (running) {
         //accept an incoming connection and create an active socket for the communication
@@ -73,20 +74,19 @@ int main(int _argc, char **_argv) {
         } else {
             //positive connection
             cout << "client connected" << endl;
-            char comBuffer[BUFFER_SIZE];
+            char comBuffer[BUFFER_SIZE]; // communication buffer to store incoming msg
+
             while (true) {
                 rVal = recv(activeSocket, comBuffer, BUFFER_SIZE, 0);
 
                 if (rVal == -1) {
                     //connection broke unexpected
-
                     cout << "client disconnected unexpected  " << port << endl;
                     cout << "ERROR = " << strerror(errno) << endl;
                     return -1;
                     break;
                 } else if (rVal == 0) {
                     //connection was closed gracefully
-
                     cout << "client disconnected  " << port << endl;
                     break;
                 } else {
@@ -101,8 +101,9 @@ int main(int _argc, char **_argv) {
                         close(activeSocket);
                         close(passiveSocket);
                     } else {
-                        string reply;
+                        string reply; // to store answer of server
                         int ix = msg.find("MyMethod");
+
                         if (ix >= 0) {
                             //found protocol
                             cout << "found command" << "MyMethod" << endl;

@@ -77,6 +77,7 @@ int main(int _argc, char **_argv) {
             char comBuffer[BUFFER_SIZE]; // communication buffer to store incoming msg
 
             while (true) {
+                //receive input form active socket and store it in comBuffer
                 rVal = recv(activeSocket, comBuffer, BUFFER_SIZE, 0);
 
                 if (rVal == -1) {
@@ -90,7 +91,7 @@ int main(int _argc, char **_argv) {
                     cout << "client disconnected  " << port << endl;
                     break;
                 } else {
-                    //got some data
+                    //take comBuffer start at index 0 of char[], run til end of rVal (contains cell count) and store it in msg
                     string msg = string(comBuffer, 0, rVal);
                     cout << "client sent massage: " << comBuffer << endl;
 
@@ -102,13 +103,17 @@ int main(int _argc, char **_argv) {
                         close(passiveSocket);
                     } else {
                         string reply; // to store answer of server
-                        int ix = msg.find("MyMethod");
+                        int ix = msg.find("MyMethod"); // search for MyMethod String
 
-                        if (ix >= 0) {
-                            //found protocol
+                        if (ix >= 0) { // if MyMethod is found
+                            // protocol
                             cout << "found command" << "MyMethod" << endl;
+
+                            // look for parantheses
                             int ixA = msg.find("(");
                             int ixB = msg.find(")");
+
+                            // store everything between parantheses in param string
                             string param = string(msg.c_str(), ixA, ixB);
                             cout << "found parameter: " << param << " ... processing ..." << endl;
 

@@ -15,6 +15,8 @@ public class Echo_SocketServer {
 		System.out.println("starting up echo server ... ");
 
 		int port = 4949;
+
+		// create passiveSocket wit give portnumber
 		ServerSocket passiveSocket = new ServerSocket(port);
 		System.out.println("Server started on port " + port);
 
@@ -23,13 +25,16 @@ public class Echo_SocketServer {
 		while(running){
 			System.out.println("waiting for clients ...");
 
+			// create new activeSocket and accept incoming connection query
 			Socket activeStocket = passiveSocket.accept();
 			while(true) {
 				String msg = null;
-				//recieve
+				// store incoming stream of activeSocket in new inputstream
 				InputStream in = activeStocket.getInputStream();
+				// create byte-array to read incoming msg
 				byte[] commBuffer = new byte[BUFFER_SIZE];
-				int rVal = in.read(commBuffer);//lest die anzahl der bytes die ankommen
+				// read and store msg into com buffer, return byte-count to rVal
+				int rVal = in.read(commBuffer);
 
 				if (rVal > 0){
 					msg = new String(commBuffer, 0, rVal);
@@ -39,11 +44,13 @@ public class Echo_SocketServer {
 					break;
 				}
 
-				//send
+				// preparing reply
 				String reply = "Echo ... " + msg;
+				// store msg into new outputstream object
 				OutputStream out = activeStocket.getOutputStream();
+				// convert out into bytearray and send it to client
 				out.write(reply.getBytes());
-				out.flush();//um kurze nachrichten zu schicken, es wird nicht darauf gewartet bis der transportchunk voll sit
+				out.flush(); // fluuuuuuuuuuuuuuuuuuuuuush
 			}
 		}// while running
 
